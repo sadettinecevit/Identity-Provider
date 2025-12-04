@@ -4,8 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IdP.Infrastructure.Extensions;
 
-public static class AuditConfigurationExtensions
+public static class ModelBuilderExtensions
 {
+    public static void ConfigureEntity<T>(this EntityTypeBuilder<T> builder) where T : class, IEntity
+    {
+        builder.Property(e => e.IsDeleted)
+            .HasColumnName("is_deleted")
+            .HasDefaultValue(false)
+            .IsRequired();
+    }
+    
     public static void ConfigureAuditable<T>(this EntityTypeBuilder<T> builder) where T : class, IAuditableEntity
     {
         builder.Property(ut => ut.CreatedBy)
