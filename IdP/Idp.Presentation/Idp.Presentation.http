@@ -1,0 +1,6 @@
+@Idp.Presentation_HostAddress = http://localhost:5183
+
+GET {{Idp.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
